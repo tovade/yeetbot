@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel = "icon" type = "image/png" href = "https://cdn.discordapp.com/attachments/766742630461079572/769606820548444160/large_yeetbot_circle.png">
+    <title><%= title %></title>
+</head>
+<body>
+  <% if (user) { %>
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a type="button" href="/login">Login</a><br>
+  <% } %>
+  <% if(user && title === "Home") { %>
+    <a type="button" href="/dashboard">Back to dashboard</a><br>
+  <% } %>
+    <% if(user && title === "settings") { %>
+    <a type="button" href="/dashboard">Back to dashboard</a><br>
+  <% } %>
+  <%- title === "Dashboard" ? "" : "<hr>" %>

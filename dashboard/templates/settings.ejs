@@ -1,0 +1,85 @@
+<%- include("partials/header", { bot, user, path, title: "settings" }) %>
+<% if (alert) { %>
+  <p><%= alert %></p><br>
+<% } %>
+<style>
+  form {background-color: #000000; color: #444}
+p {color: #C0C0C0}
+h1 {color: #FFFFFF}
+body {background-color: #000000; color: #444}
+.ok {
+ margin-top: 0;
+ margin-left: 10px;
+}
+.welcome {
+ margin-top: -110;
+ margin-left: 200;
+}
+.level {
+ margin-top: -70;
+ margin-left: 450
+}
+.global {
+ margin-top: -70;
+ margin-left: 600;
+}
+</style>
+<h1><%= guild.name %></h1>
+<div class="ok">
+  <form style="margin-top: 1em;" method="POST"> 
+  <p>Prefix:</p>
+  <input type="text" name="prefix" value="<%= settings.prefix %>" placeholder="Your prefix."><br><br>
+    <button type="submit">Save</button>
+</form>
+</div>
+<div class="welcome">
+<form style="margin-top: 1em;" method="POST"> <!-- method="post" triggers a POST request to the same url with the body of the form control inputs -->
+  <p>Welcome log:</p> 
+  <select type="text" name="welcome" value="<%= settings.welcomeChannel %>" placeholder="Channel">
+    <option enabled value=null selected>None</option>
+<form style="margin-top: 1em;" method="POST"> <!-- method="post" triggers a POST request to the same url with the body of the form control inputs -->
+    <optgroup label="Text Channels">
+  <% if (guild.channels.cache.size > 0) { %>
+   <% guild.channels.cache.filter(m => m.type == "text").forEach(channel => { %>
+        <% if (channel.type === 'text') { %>
+          <option value="<%= channel.id %>">#<%= channel.name %></option>
+   <% } %>
+      <% }); %>
+  <% } %>
+
+    </optgroup>
+
+  </select>
+            <button type="submit" class="btn bold animation hover turquoise">Save</button>
+  </form>
+  </div>
+  <div class="level">
+  <form style="margin-right: 2em;" method="POST">
+          <p>Level messages:</p>
+  <select type="text" name="level" value="<%= settings.levelMessages %>" placeholder="levels">
+    <option enabled value=false selected>off</option>
+    <option enabled balue=true selected>on</option>
+    </select>
+</form>
+  </div>
+    <div class="global">
+<form style="margin-top: 1em;" method="POST"> <!-- method="post" triggers a POST request to the same url with the body of the form control inputs -->
+  <p> global chat:</p> 
+  <select type="text" name="global" value="<%= settings.global %>" placeholder="Channel">
+    <option enabled value=null selected>None</option> <!-- method="post" triggers a POST request to the same url with the body of the form control inputs -->
+    <optgroup label="Text Channels">
+  <% if (guild.channels.cache.size > 0) { %>
+   <% guild.channels.cache.filter(m => m.type == "text").forEach(channel => { %>
+        <% if (channel.type === 'text') { %>
+          <option value="<%= channel.id %>">#<%= channel.name %></option>
+   <% } %>
+      <% }); %>
+  <% } %>
+
+    </optgroup>
+
+  </select>
+            <button type="submit" class="btn bold animation hover turquoise">Save</button>
+  </form>
+  </div>
+<%- include("partials/footer") %>
